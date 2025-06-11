@@ -9,7 +9,7 @@ int packet_get_int() {
         std::srand(static_cast<unsigned int>(std::time(nullptr)));
         seeded = true;
     }
-    return std::rand() % 6;
+    return std::rand();
 }
 std::string packet_get_string(void* /* unused_argument */) {
     static int call_count = 0;
@@ -20,7 +20,7 @@ std::string packet_get_string(void* /* unused_argument */) {
 int main() {
     int nresp = 0;
     std::vector<std::string> response;
-    nresp = 1073741824;
+    nresp = packet_get_int();
 
     if (nresp > 0) {
         response.reserve(nresp);
@@ -29,9 +29,11 @@ int main() {
         }
     }
 
-    std::cout << "Number of responses: 1073741824" << nresp << std::endl;
+    std::cout << "Number of responses: " << nresp << std::endl;
     for (const std::string& res : response) {
         std::cout << res << std::endl;
     }
     return 0;
 }
+
+
